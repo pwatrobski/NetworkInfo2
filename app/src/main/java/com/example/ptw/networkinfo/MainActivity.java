@@ -37,6 +37,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "NetworkStatusExample";
+    private static final String EXC_TAG = "ExceptionFound";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,13 +189,26 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                     TelephonyManager teleMgr = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                     String netOp = teleMgr.getNetworkOperatorName();
                     String simOp = teleMgr.getSimOperatorName();
-                    CellInfo cellInfo = (CellInfo)teleMgr.getAllCellInfo();
-                    CellLocation cellLoc = teleMgr.getCellLocation();
-                    CellSignalStrength cellSignalStrength = ((CellSignalStrength) cellInfo).getCell
-
-                    //CellInfoLte lteMgr = (CellInfoLte)getApplicationContext().getSystemService();
                     Log.d(DEBUG_TAG, "Network Operator Name: " + netOp);
                     Log.d(DEBUG_TAG, "Sim Operator Name: " + simOp);
+
+                    try {
+                        CellLocation cellLoc = teleMgr.getCellLocation();
+                        Log.d(DEBUG_TAG, "Cell Location: " + cellLoc);
+
+                        List<CellInfo> cellInfo = teleMgr.getAllCellInfo();
+                        for (int k = 0; k < cellInfo.size(); k++) {
+                            CellInfo info = cellInfo.get(k);
+                            Log.d(DEBUG_TAG, "cellInfo[" + k + "]: " + info);
+                        }
+                        //CellInfoLte cellInfoLte = (CellInfoLte) teleMgr.getCel
+                        //CellSignalStrength cellSignalStrength = ((CellSignalStrength) cellInfo).getCel
+
+                            //CellInfoLte lteMgr = (CellInfoLte)getApplicationContext().getSystemService();
+
+                    } catch (Exception e) {
+                        Log.d(DEBUG_TAG, "Unable to obtain cell signal information");
+                    }
 
                     /** min API 21 *********************************************************************
                      * Network[] getAllNetworks ()
