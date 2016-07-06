@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.ptw.networkinfo.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/update_info"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button_Update"
+            android:textAlignment="5"
+            android:textStyle="bold"
+            android:text="Update Network Connectivity Info:" />
+
+        <Button android:id="@id/button_Update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/button_update"
+            android:onClick="UpdateInfo" />
+    </LinearLayout>
+
+    <TextView android:id="@+id/wifi_conn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wifi connected:" />
+
+    <TextView android:id="@+id/mobile_conn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile connected:" />
+
+    <TextView android:id="@+id/new_net"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:minLines="5"
+        android:maxLines="50"
+        android:scrollbars="vertical"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/update_capability"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button_Capability"
+            android:textAlignment="5"
+            android:textStyle="bold"
+            android:text="Update Network Capability Info:" />
+
+        <Button android:id="@id/button_Capability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/button_update"
+            android:onClick="UpdateCapability" />
+    </LinearLayout>
+
+    <TextView android:id="@+id/netCap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:minLines="5"
+        android:maxLines="50"
+        android:scrollbars="vertical"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView android:id="@+id/update_properties"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/button_Properties"
+            android:textAlignment="5"
+            android:textStyle="bold"
+            android:text="Update Link Properties Info:" />
+
+        <Button android:id="@id/button_Properties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/button_update"
+            android:onClick="UpdateProperties" />
+    </LinearLayout>
+
+    <TextView android:id="@+id/netProp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:minLines="5"
+        android:maxLines="50"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>
