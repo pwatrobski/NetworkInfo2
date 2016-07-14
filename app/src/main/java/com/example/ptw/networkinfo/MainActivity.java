@@ -1,6 +1,7 @@
 package com.example.ptw.networkinfo;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
@@ -14,6 +15,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.CellInfo;
@@ -580,13 +583,27 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         allNetworkLinkInfo = allNetworkLinkInfo.concat("\t" + num_null + " null networks\n");
                 }
 
-               //Print out the network information
-               final TextView netProp = (TextView) findViewById(R.id.netProp);
+                //Print out the network information
+                final TextView netProp = (TextView) findViewById(R.id.netProp);
                 netProp.setText(allNetworkLinkInfo);
                 netProp.setMovementMethod(new ScrollingMovementMethod());
             }
         });
 
+
+        final TextView buttonNetCapKey = (TextView) findViewById(R.id.update_capability);
+        buttonNetCapKey.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showNetworkCapabilityDialog();
+            }
+        });
+
+        final TextView buttonLinkPropKey = (TextView) findViewById(R.id.update_properties);
+        buttonLinkPropKey.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showLinkPropertiesDialog();
+            }
+        });
     }
 
     @Override
@@ -611,6 +628,70 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void showNetworkCapabilityDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getString(R.string.dialog_title_netcap));
+        builder.setMessage(getString(R.string.dialog_message_netcap));
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Dismiss the info dialog
+                dialog.dismiss();
+            }
+        });
+
+        /*
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Dismiss
+            }
+
+        });
+        */
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
+    private void showLinkPropertiesDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getString(R.string.dialog_title_linkprop));
+        builder.setMessage(getString(R.string.dialog_message_linkprop));
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Dismiss the info dialog
+                        dialog.dismiss();
+                    }
+                });
+
+        /*
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Dismiss
+            }
+
+        });
+        */
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
 
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
