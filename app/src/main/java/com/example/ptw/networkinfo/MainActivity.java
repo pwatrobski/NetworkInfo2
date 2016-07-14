@@ -284,8 +284,12 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                          */
                         NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(allNetworks[i]);
                         int netCap_content = networkCapabilities.describeContents();
-                        int dnBW = networkCapabilities.getLinkDownstreamBandwidthKbps();
-                        int upBW = networkCapabilities.getLinkUpstreamBandwidthKbps();
+
+                        Bandwidth dnBW, upBW;
+                        dnBW = new Bandwidth(networkCapabilities.getLinkDownstreamBandwidthKbps());
+                        upBW = new Bandwidth(networkCapabilities.getLinkUpstreamBandwidthKbps());
+//                        int dnBW = networkCapabilities.getLinkDownstreamBandwidthKbps();
+//                        int upBW = networkCapabilities.getLinkUpstreamBandwidthKbps();
                         boolean trusted = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_TRUSTED);
                         boolean validated = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
                         boolean internet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
@@ -293,10 +297,12 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         boolean wifi = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
                         boolean vpn = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
 
+
+
                         if (extraInfo != null) {
                             allNetExtraInfo = allNetExtraInfo.concat("\tNetwork Capabilities Content: " + netCap_content + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tDownlink BW: " + dnBW + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tUplink BW: " + upBW + "\n");
+                            allNetExtraInfo = allNetExtraInfo.concat("\tDownlink BW: " + dnBW.getBps_db() + dnBW.getUnit() + "\n");
+                            allNetExtraInfo = allNetExtraInfo.concat("\tUplink BW: " + upBW.getBps_db() + upBW.getUnit() + "\n");
                             allNetExtraInfo = allNetExtraInfo.concat("\tTrusted: " + trusted + "\n");
                             allNetExtraInfo = allNetExtraInfo.concat("\tValidated: " + validated + "\n");
                             allNetExtraInfo = allNetExtraInfo.concat("\tInternet: " + internet + "\n");
@@ -306,8 +312,8 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         }
 
                         Log.d(DEBUG_TAG, "[" + i + "] Network Capabilities Content: " + netCap_content);
-                        Log.d(DEBUG_TAG, "[" + i + "] Downlink BW: " + dnBW);
-                        Log.d(DEBUG_TAG, "[" + i + "] Uplink BW: " + upBW);
+                        Log.d(DEBUG_TAG, "[" + i + "] Downlink BW: " + dnBW.getBps_db() + dnBW.getUnit());
+                        Log.d(DEBUG_TAG, "[" + i + "] Uplink BW: " + upBW.getBps_db() + upBW.getUnit());
                         Log.d(DEBUG_TAG, "[" + i + "] Trusted: " + trusted);
                         Log.d(DEBUG_TAG, "[" + i + "] Validated: " + validated);
                         Log.d(DEBUG_TAG, "[" + i + "] Internet: " + internet);
@@ -473,8 +479,11 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                          */
                         NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(allNetworks[i]);
                         int netCap_content = networkCapabilities.describeContents();
-                        int dnBW = networkCapabilities.getLinkDownstreamBandwidthKbps();
-                        int upBW = networkCapabilities.getLinkUpstreamBandwidthKbps();
+                        Bandwidth dnBW, upBW;
+                        dnBW = new Bandwidth(networkCapabilities.getLinkDownstreamBandwidthKbps());
+                        upBW = new Bandwidth(networkCapabilities.getLinkUpstreamBandwidthKbps());
+//                        int dnBW = networkCapabilities.getLinkDownstreamBandwidthKbps();
+//                        int upBW = networkCapabilities.getLinkUpstreamBandwidthKbps();
                         boolean trusted = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_TRUSTED);
                         boolean validated = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
                         boolean internet = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
@@ -484,8 +493,8 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
 
                         if (networkCapabilities != null) {
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tNetwork Capabilities Content: " + netCap_content + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tDownlink BW: " + dnBW + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tUplink BW: " + upBW + "\n");
+                            allNetworkCapabilities = allNetworkCapabilities.concat("\tDownlink BW: " + dnBW.getBps_db() + dnBW.getUnit() + "\n");
+                            allNetworkCapabilities = allNetworkCapabilities.concat("\tUplink BW: " + upBW.getBps_db() + upBW.getUnit() + "\n");
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tTrusted: " + trusted + "\n");
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tValidated: " + validated + "\n");
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tInternet: " + internet + "\n");
@@ -495,8 +504,8 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         }
 
                         Log.d(DEBUG_TAG, "[" + i + "] Network Capabilities Content: " + netCap_content);
-                        Log.d(DEBUG_TAG, "[" + i + "] Downlink BW: " + dnBW);
-                        Log.d(DEBUG_TAG, "[" + i + "] Uplink BW: " + upBW);
+                        Log.d(DEBUG_TAG, "[" + i + "] Downlink BW: " + dnBW.getBps_db() + dnBW.getUnit());
+                        Log.d(DEBUG_TAG, "[" + i + "] Uplink BW: " + upBW.getBps_db() + upBW.getUnit());
                         Log.d(DEBUG_TAG, "[" + i + "] Trusted: " + trusted);
                         Log.d(DEBUG_TAG, "[" + i + "] Validated: " + validated);
                         Log.d(DEBUG_TAG, "[" + i + "] Internet: " + internet);
