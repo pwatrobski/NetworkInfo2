@@ -3,6 +3,7 @@ package com.example.ptw.networkinfo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //forcing to portrait mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Try Updating Network Connectivity Info Instead...", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Tap the update titles for definitions of key words", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -72,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(DEBUG_TAG, "Wifi connected: " + isWifiConn);
                 Log.d(DEBUG_TAG, "Mobile connected: " + isMobileConn);
 
+/*
                 final TextView wifi_conn = (TextView) findViewById(R.id.wifi_conn);
                 wifi_conn.setText("Wifi connected: " + isWifiConn);
                 final TextView mob_conn = (TextView) findViewById(R.id.mobile_conn);
                 mob_conn.setText("Mobile connected: " + isMobileConn);
-
+*/
 
 
 
@@ -221,7 +224,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                     int numNetworks = allNetworks.length;
                     Log.d(DEBUG_TAG, "Number of Networks Currently Tracked: " + numNetworks);
 
-                    allNetExtraInfo = "Extra Info for " + numNetworks + ":\n";
+                    allNetExtraInfo = "Info for " + numNetworks + " network(s) found:\n";
                     int num_null = 0;
                     for (int i = 0; i < numNetworks; i++) {
                         NetworkInfo allNetworkInfo = connMgr.getNetworkInfo(allNetworks[i]);
@@ -247,20 +250,30 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         if (extraInfo != null) {
                             allNetExtraInfo = allNetExtraInfo.concat("\t[" + i + "]\t" + extraInfo + "\n");
 
+                            //allNetExtraInfo = allNetExtraInfo.concat("\tType: " + type + "\n");
+                            //allNetExtraInfo = allNetExtraInfo.concat("\tType Name: " + typeName + "\n");
+                            //allNetExtraInfo = allNetExtraInfo.concat("\tDetailed State: " + detailedState + "\n");
+                            allNetExtraInfo = allNetExtraInfo.concat("\t" + typeName + " " + detailedState + "\n");
                             allNetExtraInfo = allNetExtraInfo.concat("\tContents: " + contents + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tDetailed State: " + detailedState + "\n");
                             //allNetExtraInfo = allNetExtraInfo.concat("\tExtra Info" + extraInfo + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tReason: " + reason + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tState: " + state + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tSubtype: " + subtype + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tSubtype Name: " + subtypeName + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tType: " + type + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tType Name: " + typeName + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tAvailable: " + available + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tConnected: " + connected + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tConnecting: " + connecting + "\n");
-                            allNetExtraInfo = allNetExtraInfo.concat("\tFailover: " + failover + "\n");
+                            if (connecting) {
+                                if (connected) {
+                                    //allNetExtraInfo = allNetExtraInfo.concat("\tConnected: " + connected + "\n");
+                                } else {
+                                    allNetExtraInfo = allNetExtraInfo.concat("\tConnecting: " + connecting + "\n");
+                                }
+                            } else {
+                                allNetExtraInfo = allNetExtraInfo.concat("\tAvailable: " + available);
+                                allNetExtraInfo = allNetExtraInfo.concat("\tNot connected reason: " + reason + "\n");
+                                allNetExtraInfo = allNetExtraInfo.concat("\tFailover: " + failover + "\n");
+                            }
                             allNetExtraInfo = allNetExtraInfo.concat("\tRoaming: " + roaming + "\n");
+                            //allNetExtraInfo = allNetExtraInfo.concat("\tState: " + state + "\n");
+
+                            if (subtype != 0) {
+                                allNetExtraInfo = allNetExtraInfo.concat("\tSubtype: " + subtype + "\n");
+                                allNetExtraInfo = allNetExtraInfo.concat("\tSubtype Name: " + subtypeName + "\n");
+                            }
                         } else {
                             num_null++;
                         }
@@ -285,6 +298,8 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         /** min API 21 *********************************************************************
                          * NetworkCapabilities getNetworkCapabilities (Network network)
                          */
+
+                        /*
                         NetworkCapabilities networkCapabilities = connMgr.getNetworkCapabilities(allNetworks[i]);
                         int netCap_content = networkCapabilities.describeContents();
 
@@ -323,12 +338,15 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         Log.d(DEBUG_TAG, "[" + i + "] Cellular: " + cellular);
                         Log.d(DEBUG_TAG, "[" + i + "] WiFi: " + wifi);
                         Log.d(DEBUG_TAG, "[" + i + "] VPN: " + vpn);
-
+                        */
 
                         /** min API 21
                          * LinkProperties getLinkProperties (Network network)
                          * returns the LinkProperties for the given Network, (returns null if network is unknown)
                          */
+
+                        /*
+
                         LinkProperties linkProperties = connMgr.getLinkProperties(allNetworks[i]);
                         List<InetAddress> inetAddressList = linkProperties.getDnsServers();
                         String domains = linkProperties.getDomains();
@@ -360,10 +378,10 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         Log.d(DEBUG_TAG, "[" + i + "] Hash: " + Integer.toHexString(hash));
                         allNetExtraInfo = allNetExtraInfo.concat("\tHash: " + Integer.toHexString(hash) + "\n");
 
+                        */
                     }
                     if (num_null != 0)
                         allNetExtraInfo = allNetExtraInfo.concat("\t" + num_null + " null networks\n");
-
 
                     /** min API 23 *********************************************************************
                      * boolean bindProcessToNetwork (Network network)
@@ -469,7 +487,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
 
                 String allNetworkCapabilities;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    allNetworkCapabilities = "Version too early...\n";
+                    allNetworkCapabilities = "Lollipop or newer required\n";
                 } else {
                     Network allNetworks[] = connMgr.getAllNetworks();
                     int numNetworks = allNetworks.length;
@@ -532,7 +550,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
 
                 String allNetworkLinkInfo;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    allNetworkLinkInfo = "API Version too early...";
+                    allNetworkLinkInfo = "Lollipop or newer required";
                 } else {
                     Network allNetworks[] = connMgr.getAllNetworks();
                     int numNetworks = allNetworks.length;
@@ -591,6 +609,13 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         });
 
 
+        final TextView buttonNetConnKey = (TextView) findViewById(R.id.update_info);
+        buttonNetConnKey.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showNetworkConnectivityDialog();
+            }
+        });
+
         final TextView buttonNetCapKey = (TextView) findViewById(R.id.update_capability);
         buttonNetCapKey.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -629,6 +654,38 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
     }
 
 
+    private void showNetworkConnectivityDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(getString(R.string.dialog_title_netconn));
+        builder.setMessage(getString(R.string.dialog_message_netconn));
+
+        String positiveText = getString(android.R.string.ok);
+        builder.setPositiveButton(positiveText,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Dismiss the info dialog
+                        dialog.dismiss();
+                    }
+                });
+
+        /*
+        String negativeText = getString(android.R.string.cancel);
+        builder.setNegativeButton(negativeText,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                //Dismiss
+            }
+
+        });
+        */
+
+        AlertDialog dialog = builder.create();
+        // display dialog
+        dialog.show();
+    }
+
     private void showNetworkCapabilityDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(getString(R.string.dialog_title_netcap));
@@ -637,12 +694,12 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         String positiveText = getString(android.R.string.ok);
         builder.setPositiveButton(positiveText,
                 new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //Dismiss the info dialog
-                dialog.dismiss();
-            }
-        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Dismiss the info dialog
+                        dialog.dismiss();
+                    }
+                });
 
         /*
         String negativeText = getString(android.R.string.cancel);

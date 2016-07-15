@@ -2,10 +2,12 @@
     <string name="app_name">Network Info</string>
     <string name="action_settings">Settings</string>
     <string name="button_update">Update</string>
-    <string name="dialog_title_netcap">Network Capability Key Terms</string>
+    <string name="dialog_title_netconn">Network Connectivity Key</string>
+    <string name="dialog_message_netconn"></string>
+    <string name="dialog_title_netcap">Network Capability Key</string>
     <string name="dialog_message_netcap">TRUSTED:  Indicates that the user has indicated implicit trust of this network. This generally means it\'s a sim-selected carrier, a plugged in ethernet, a paired BT device or a wifi the user asked to connect to. Untrusted networks are probably limited to unknown wifi AP. Set by default.\n\n
         VALIDATED:  Indicates that connectivity on this network was successfully validated. For example, for a network with NET_CAPABILITY_INTERNET, it means that Internet connectivity was successfully detected.</string>
-    <string name="dialog_title_linkprop">Link Properties Key Terms</string>
+    <string name="dialog_title_linkprop">Link Properties Key</string>
     <string name="dialog_message_linkprop">DNS Server: \n\n
     Domains: \n\n
     HTTP Proxy: \n\n
