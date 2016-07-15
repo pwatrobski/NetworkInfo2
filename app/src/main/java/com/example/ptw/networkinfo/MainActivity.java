@@ -262,17 +262,17 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                                 } else {
                                     allNetExtraInfo = allNetExtraInfo.concat("\tConnecting: " + connecting + "\n");
                                 }
-                            } else {
-                                allNetExtraInfo = allNetExtraInfo.concat("\tAvailable: " + available);
-                                allNetExtraInfo = allNetExtraInfo.concat("\tNot connected reason: " + reason + "\n");
                                 allNetExtraInfo = allNetExtraInfo.concat("\tFailover: " + failover + "\n");
+                            } else {
+                                allNetExtraInfo = allNetExtraInfo.concat("\tAvailable: " + available + "\n");
+                                allNetExtraInfo = allNetExtraInfo.concat("\tNot connected reason: " + reason + "\n");
                             }
-                            allNetExtraInfo = allNetExtraInfo.concat("\tRoaming: " + roaming + "\n");
+                            allNetExtraInfo = allNetExtraInfo.concat("\tRoaming: " + roaming);
                             //allNetExtraInfo = allNetExtraInfo.concat("\tState: " + state + "\n");
 
                             if (subtype != 0) {
-                                allNetExtraInfo = allNetExtraInfo.concat("\tSubtype: " + subtype + "\n");
-                                allNetExtraInfo = allNetExtraInfo.concat("\tSubtype Name: " + subtypeName + "\n");
+                                allNetExtraInfo = allNetExtraInfo.concat("\n\tSubtype: " + subtype + "\n");
+                                allNetExtraInfo = allNetExtraInfo.concat("\tSubtype Name: " + subtypeName);
                             }
                         } else {
                             num_null++;
@@ -493,7 +493,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                     int numNetworks = allNetworks.length;
                     Log.d(DEBUG_TAG, "Number of Networks Currently Tracked: " + numNetworks);
 
-                    allNetworkCapabilities = "Extra Info for " + numNetworks + ":\n";
+                    allNetworkCapabilities = "Info for " + numNetworks + " network(s) found:\n";
                     for (int i = 0; i < numNetworks; i++) {
                         /** min API 21 *********************************************************************
                          * NetworkCapabilities getNetworkCapabilities (Network network)
@@ -513,15 +513,31 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                         boolean vpn = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_VPN);
 
                         if (networkCapabilities != null) {
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tNetwork Capabilities Content: " + netCap_content + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tDownlink BW: " + dnBW.getBps_db() + dnBW.getUnit() + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tUplink BW: " + upBW.getBps_db() + upBW.getUnit() + "\n");
+                            if (netCap_content != 0) {
+                                allNetworkCapabilities = allNetworkCapabilities.concat("\tNetwork Capabilities Content: " + netCap_content + "\n");
+                            }
+                            if (cellular) {
+                                allNetworkCapabilities = allNetworkCapabilities.concat("\tCellular");
+                                if (wifi) {
+                                    allNetworkCapabilities = allNetworkCapabilities.concat("\n and WiFi\n");
+                                } else {
+                                    allNetworkCapabilities = allNetworkCapabilities.concat("\n");
+                                }
+                            } else if (wifi) {
+                                allNetworkCapabilities = allNetworkCapabilities.concat("\tWiFi");
+                            }
+                            if (internet) {
+                                allNetworkCapabilities = allNetworkCapabilities.concat(" with Internet\n");
+                            } else {
+                                allNetworkCapabilities = allNetworkCapabilities.concat(" without Internet\n");
+                            }
+                            allNetworkCapabilities = allNetworkCapabilities.concat("\tBandwidth (Up/Down): " +
+                                    upBW.getBps_db() + upBW.getUnit() + " / " +  + dnBW.getBps_db() + dnBW.getUnit() + "\n");
+//                            allNetworkCapabilities = allNetworkCapabilities.concat("\tDownlink BW: " + dnBW.getBps_db() + dnBW.getUnit() + "\n");
+//                            allNetworkCapabilities = allNetworkCapabilities.concat("\tUplink BW: " + upBW.getBps_db() + upBW.getUnit() + "\n");
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tTrusted: " + trusted + "\n");
                             allNetworkCapabilities = allNetworkCapabilities.concat("\tValidated: " + validated + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tInternet: " + internet + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tCellular: " + cellular + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tWiFi: " + wifi + "\n");
-                            allNetworkCapabilities = allNetworkCapabilities.concat("\tVPN: " + vpn + "\n");
+                            allNetworkCapabilities = allNetworkCapabilities.concat("\tVPN: " + vpn);
                         }
 
                         Log.d(DEBUG_TAG, "[" + i + "] Network Capabilities Content: " + netCap_content);
@@ -556,7 +572,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                     int numNetworks = allNetworks.length;
                     Log.d(DEBUG_TAG, "Number of Networks Currently Tracked: " + numNetworks);
 
-                    allNetworkLinkInfo = "Extra Info for " + numNetworks + ":\n";
+                    allNetworkLinkInfo = "Info for " + numNetworks + " network(s) found:\n";
 
                     int num_null = 0;
                     for (int i = 0; i < numNetworks; i++) {
