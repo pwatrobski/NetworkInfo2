@@ -3,10 +3,14 @@
     <string name="action_settings">Settings</string>
     <string name="button_update">Update</string>
     <string name="dialog_title_netconn">Network Connectivity Key</string>
-    <string name="dialog_message_netconn">AVAILABLE:  Indicates whether network connectivity is possible. A network is unavailable when a persistent or semi-persistent condition prevents the possibility of connecting to that network\n\nFAILOVER:  Indicates whether the current attempt to connect to the network resulted from the ConnectivityManager trying to fail over to this network following a disconnect from another network\n\nROAMING:  Indicates whether the device is currently roaming on this network. When true, it suggests that use of data on this network may incur extra costs
+    <string name="dialog_message_netconn">AVAILABLE:\nIndicates whether network connectivity is possible. A network is unavailable when a persistent or semi-persistent condition prevents the possibility of connecting to that network\n\nFAILOVER:\nIndicates whether the current attempt to connect to the network resulted from the ConnectivityManager trying to fail over to this network following a disconnect from another network\n\nROAMING:\nIndicates whether the device is currently roaming on this network. When true, it suggests that use of data on this network may incur extra costs
     </string>
     <string name="dialog_title_netcap">Network Capability Key</string>
-    <string name="dialog_message_netcap">TRUSTED:  Indicates that the user has indicated implicit trust of this network. This generally means it\'s a sim-selected carrier, a plugged in ethernet, a paired BT device or a wifi the user asked to connect to. Untrusted networks are probably limited to unknown wifi AP. Set by default.\n\nVALIDATED:  Indicates that connectivity on this network was successfully validated. For example, for a network with NET_CAPABILITY_INTERNET, it means that Internet connectivity was successfully detected.</string>
+    <string name="dialog_message_netcap">TRUSTED:\nIndicates that the user has indicated implicit trust of this network. This generally means it\'s a sim-selected carrier, a plugged in ethernet, a paired BT device or a wifi the user asked to connect to. Untrusted networks are probably limited to unknown wifi AP. Set by default.\n\nVALIDATED:\nIndicates that connectivity on this network was successfully validated. For example, for a network with NET_CAPABILITY_INTERNET, it means that Internet connectivity was successfully detected.</string>
     <string name="dialog_title_linkprop">Link Properties Key</string>
-    <string name="dialog_message_linkprop">Domains: \n\nLink Address: \n\nRoute Info: \n\nHash: </string>
+    <string name="dialog_message_linkprop">DOMAINS:\nDNS domains search path set for this link.\n\nLINK ADDRESS:\nIdentifies an IP address on a network link. An IP address and prefix length (e.g., 2001:db8::1/64 or 192.0.2.1/24). The address must be unicast.\n\nROUTE INFO:\nDescribes both static and live network configuration information:\n\t\t1) destination IpPrefix (null indicates a default route of the address family implied by the gateway IP Address).\n\t\t2) A gateway InetAddress indicating the next hop to use (null indicates a directly-connected route).\n\t\t3) An interface. </string>
+
+    <string name="title_activity_disclaimer">DisclaimerActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

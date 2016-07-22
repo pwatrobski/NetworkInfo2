@@ -271,7 +271,7 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
                             //allNetExtraInfo = allNetExtraInfo.concat("\tState: " + state + "\n");
 
                             if (subtype != 0) {
-                                allNetExtraInfo = allNetExtraInfo.concat("\n\tSubtype: " + subtype + "\n");
+                                //allNetExtraInfo = allNetExtraInfo.concat("\n\tSubtype: " + subtype + "\n");
                                 allNetExtraInfo = allNetExtraInfo.concat("\tSubtype Name: " + subtypeName);
                             }
                         } else {
@@ -700,6 +700,10 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
+
+        // Shrink font size
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(14);
     }
 
     private void showNetworkCapabilityDialog() {
@@ -732,6 +736,10 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         AlertDialog dialog = builder.create();
         // display dialog
         dialog.show();
+
+        // Shrink font size
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(14);
     }
 
     private void showLinkPropertiesDialog() {
@@ -762,8 +770,13 @@ Log.d(DEBUG_TAG, "Active Network: " + activeNetwork);
         */
 
         AlertDialog dialog = builder.create();
+
         // display dialog
         dialog.show();
+
+        // Shrink font size
+        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+        textView.setTextSize(14);
     }
 
     /** Called when the user clicks the Send button */
